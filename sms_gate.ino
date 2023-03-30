@@ -37,13 +37,19 @@ void setup() {
     #endif
   }
 
+//  for(uint8_t i=0; i<255; i++){
+//    sim808.deleteSMS(i);
+//    Serial.print(F("Delete message: "));
+//    Serial.println(i);
+//  }
+
 }
 
 void serialEvent() {
   //statements
   String message = Serial.readString();
   message.trim();
-  Serial.println(message);
+//  Serial.println(message);
   parse_command(message);
 }
 
@@ -65,11 +71,12 @@ void loop() {
         char phone_number_arr[PHONE_NUMBER_LENGTH] = {0};
         char datetime[24] = {0};
         sim808.readSMS(messageIndex, message, MESSAGE_LENGTH, phone_number_arr, datetime);
+        sim808.deleteSMS(messageIndex);
 
-        Serial.print(F("Phone: "));
+        Serial.print(F("Phone|"));
         Serial.println(phone_number_arr);
         
-        Serial.print(F("SMS: "));
+        Serial.print(F("SMS|"));
         Serial.println(message);
       }
 

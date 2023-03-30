@@ -44,7 +44,10 @@ void send_sms(String message, int8_t idx_start, int8_t idx){
   sms.getBytes(sms_arr, MESSAGE_LENGTH);
 
   sim808.sendSMS(phone_number_arr, sms_arr);
-  Serial.println(F("SMS sent"));
+  Serial.print(F("SMS sent "));
+  Serial.print(phone_number_arr);
+  Serial.print(F(" "));
+  Serial.println(sms_arr);
 }
 
 void parse_command(String message){
@@ -57,9 +60,9 @@ void parse_command(String message){
 
 
   if(command == 1){ // send sms
-    #if defined(DEBUG)
-    Serial.println(F("command == 1"));
-    #endif
+//    #if defined(DEBUG)
+//    Serial.println(F("command == 1"));
+//    #endif
     idx_start = idx + 1;
     send_sms(message, idx_start, idx);
   };
